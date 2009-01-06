@@ -1,0 +1,262 @@
+---
+layout: default
+title: B001e
+---
+<section>
+	<header>
+		<h1>Abstract</h1>
+	</header>
+	<p>
+		<a href='https://JoergWMittag.GitHub.Com/{{ page.title | downcase }}/'>{{ page.title }}</a> is a message-sending based re-implementation of the Boolean operators <code>and</code>, <code>or</code> and <code>not</code> and the Boolean expressions <code>if</code> and <code>unless</code> in pure Ruby. Lazy Evaluation / Short-circuiting is achieved through the use of blocks and lambda expressions.
+	</p>
+</section>
+<nav>
+	<header>
+		<h1>Contents</h1>
+	</header>
+	<ol>
+		<li><a href="#what">What</a></li>
+		<li><a href="#why">Why</a></li>
+		<li><a href="#how">How</a></li>
+		<li><a href="#where">Where</a></li>
+		<li><a href="#installation">Installation</a></li>
+		<li><a href="#usage">Usage</a></li>
+		<li><a href="#acknowledgements">Acknowledgements</a>
+			<ol>
+				<li><a href="#style">Style</a></li>
+				<li><a href="#implementation">Implementation</a></li>
+				<li><a href="#specs">Specs</a></li>
+			</ol>
+		</li>
+		<li><a href="#license">License</a></li>
+	</ol>
+</nav>
+<section id='what'>
+	<header>
+		<h1>What</h1>
+	</header>
+	<p>
+		This library contains sample re-implementations of the 
+		Boolean operators <code>and</code>, <code>or</code> and 
+		<code>not</code> and the Boolean expressions 
+		<code>if</code> and <code>unless</code>, in pure Ruby. The 
+		style is heavily inspired by 
+		<a href="http://Smalltalk.Org/">Smalltalk</a> and its 
+		relatives: the operators become messages that take block 
+		parameters and are sent to the conditionals.
+	<p>
+	<section>
+		<header>
+			<h1>Operator / keyword style:</h1>
+		</header>
+{% highlight ruby %}
+if c1 && c2
+  t
+elsif c3
+  ei
+else
+  e
+end
+{% endhighlight %}
+		<p>becomes:</p>
+{% highlight ruby %}
+c1.and { c2 }.ifelse ->() { t }, ->() { c3.ifelse ->() { ei }, ->() { e } }
+{% endhighlight %}
+	</section>
+</section>
+<section id='why'>
+	<header>
+		<h1>Why</h1>
+	</header>
+	<p>
+		Every so often, there is a discussion on either the 
+		<a href="http://Ruby-Forum.Com/forum/4/">Ruby-Talk</a> or 
+		<a href="http://Ruby-Forum.Com/forum/14/">Ruby-Core</a> 
+		mailinglists, whether the number of operators that are not 
+		backed by methods should be reduced. In Ruby 1.9, 
+		<code>!</code> and <code>!=</code> have already become 
+		methods, but <code>and</code> and <code>or</code> are still 
+		builtin operators and <code>if</code> and <code>unless</code> 
+		still builtin keywords.
+	</p>
+	<p>
+		One argument that is sometimes brought up is that because of 
+		the short-circuiting nature of those operators, implementing 
+		them as methods is impossible or at least hard. I just wanted 
+		to see <em>how</em> hard it really is!
+	</p>
+</section>
+<section id='how'>
+	<header>
+		<h1>How</h1>
+	</header>
+	<p>
+		All the operators become methods. The logic is achieved 
+		through polymorphism: basically, <code>NilClass</code> and 
+		<code>FalseClass</code> get one set of implementations, 
+		<code>Object</code> gets the opposite set.
+	</p>
+	<p>
+		Lazy Evaluation is achieved with blocks: if a block is not 
+		supposed to be evaluated, it is simply never 
+		<code>yield</code>ed to.
+	</p>
+</section>
+<section id='where'>
+	<header>
+		<h1>Where</h1>
+	</header>
+	<p>
+		At 
+		<a href='https://GitHub.Com/JoergWMittag/B001e/'>GitHub</a>, 
+		of course!
+	</p>
+</section>
+<section id='installation'>
+	<header>
+		<h1>Installation</h1>
+	</header>
+{% highlight bash %}
+gem install JoergWMittag-b001e
+{% endhighlight %}
+</section>
+<section id='usage'>
+	<header>
+		<h1>Usage</h1>
+	</header>
+{% highlight ruby %}
+begin require 'rubygems'; rescue LoadError
+else begin gem 'JoergWMittag-b001e', '~> 0.0.1'; rescue Gem::LoadError; end end
+require 'b001e'
+
+true.and { nil.or { 42 } }.if { puts "It's true!" }
+# Equivalent to: if true && (nil || 42) then puts "It's true!" end
+
+false.ifelse ->() { puts "You'll never see this." }, ->() { puts 'But this!' }
+# Equivalent to: if false then puts "You'll never see this." else puts 'But this!' end
+{% endhighlight %}
+</section>
+<section id='acknowledgements'>
+	<header>
+		<h1>Acknowledgements</h1>
+	</header>
+	<section id='style'>
+		<header>
+			<h2>Style</h2>
+		</header>
+		<p>
+			The API style is heavily influenced by 
+			<a href="http://Smalltalk.Org/">Smalltalk</a>.
+		</p>
+	</section>
+	<section id='implementation'>
+		<header>
+			<h2>Implementation</h2>
+		</header>
+		<p>
+			The implementation is literally textbook: every 
+			introductory CS text should have it.
+		</p>
+	</section>
+	<section id='specs'>
+		<header>
+			<h2>Specs</h2>
+		</header>
+		<p>
+			The Specs were directly lifted from the 
+			<a href="http://RubySpec.Org/">RubySpec</a> project.
+		</p>
+	</section>
+</section>
+<section id='license'>
+	<header>
+		<h1>License</h1>
+	</header>
+	<p>
+		My original work is licensed under the 
+		<a href="https://GitHub.Com/JoergWMittag/B001e/tree/master/LICENSE.txt">
+			MIT X11 License
+		</a>.
+	</p>
+	<section>
+		<header>
+			<h2>The MIT License</h2>
+			<p>
+				Copyright (c) 2009 Jörg W Mittag 
+				&lt;<a href='mailto:JoergWMittag+B001e@GoogleMail.Com'>
+					JoergWMittag+B001e&#64;GoogleMail.Com
+				</a>&gt;
+			</p>
+		</header>
+		<p>
+			Permission is hereby granted, free of charge, to any person 
+			obtaining a copy of this software and associated 
+			documentation files (the &quot;Software&quot;), to deal in 
+			the Software without restriction, including without 
+			limitation the rights to use, copy, modify, merge, publish, 
+			distribute, sublicense, and/or sell copies of the Software, 
+			and to permit persons to whom the Software is furnished to do 
+			so, subject to the following conditions:
+			<p>
+				The above copyright notice and this permission notice shall 
+				be included in all copies or substantial portions of the 
+				Software.
+			</p>
+		</p>
+		<p>
+			THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY 
+			OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+			THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
+			PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR 
+			COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+			LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
+			OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+			SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+		</p>
+	</section>
+	<p>
+		The 
+		<a href="https://GitHub.Com/RubySpec/RubySpec/tree/master/LICENSE">
+			RubySpec license
+		</a> 
+		is also MIT X11.
+	</p>
+	<section>
+		<header>
+			<h2>The RubySpec License</h2>
+			<p>
+				The specs were originally ported and heavily modified 
+				from the RubySpec project 
+				&lt;<a href='http://RubySpec.Org'>
+					http://RubySpec.Org/
+				</a>&gt;. 
+				This is the original license:
+			</p>
+			<p>
+				Copyright (c) 2008 Engine Yard, Inc. All rights reserved.
+			</p>
+		</header>
+		<p>
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the &quot;Software&quot;), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+</p><p>
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+</p><p>
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+		</p>
+	</section>
+</section>
