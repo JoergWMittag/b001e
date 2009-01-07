@@ -89,7 +89,7 @@ Usage
 ::
 
 	begin require 'rubygems'; rescue LoadError
-	else begin gem 'JoergWMittag-b001e', '~> 0.0.1'; rescue Gem::LoadError; end end
+	else begin gem 'JoergWMittag-b001e', '~> 0.0.2'; rescue Gem::LoadError; end end
 	require 'b001e'
 
 	true.and { nil.or { 42 } }.if { puts "It's true!" }
