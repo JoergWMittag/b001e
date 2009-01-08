@@ -16,7 +16,7 @@ module B001e
     end
 
     def unless
-      yield if block_given?
+      yield
     end
 
     def unlesselse unless_branch = ->() {}, _ = nil

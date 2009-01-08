@@ -53,7 +53,7 @@ describe 'The if expression' do
   end
 
   it 'returns nil if then-body is empty and expression is true' do
-    true.if.must_be_nil
+    true.if{}.must_be_nil
   end
 
   it 'returns nil if then-body is empty, expression is true and else part is present' do

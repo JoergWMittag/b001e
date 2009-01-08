@@ -9,7 +9,7 @@ $LOAD_PATH.unshift libdir unless $LOAD_PATH.include? libdir
 module B001e
   module Truthiness
     def if
-      yield if block_given?
+      yield
     end
 
     def ifelse then_branch = ->() {}, _ = nil
