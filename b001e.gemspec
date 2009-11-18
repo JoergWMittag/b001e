@@ -34,12 +34,17 @@ speclist = filelist.grep /^spec/
 $spec = Gem::Specification.new do |s|
   s.name = 'b001e'
   s.summary = 'Message-sending based re-implementation of the Boolean operators.'
-  s.version = Gem::Version.new '0.0.3'
+  s.version = Gem::Version.new '0.0.0a'
   s.author = 'Jörg W Mittag'
   s.email = 'JoergWMittag+B001e@GoogleMail.Com'
-  s.homepage = 'https://JoergWMittag.GitHub.Com/b001e/'
+  s.homepage = 'http://JoergWMittag.GitHub.Com/b001e/'
   s.rubyforge_project = 'b001e'
-  s.required_ruby_version = Gem::Requirement.new '~> 1.9.1'
+  s.license = 'MIT X11'
+  s.required_ruby_version = '~> 1.9.1'
+  s.required_rubygems_version = '~> 1.3.5'
+  s.has_rdoc = true
+  s.rdoc_options = %w[--all --charset=UTF-8 --line-numbers --webcvs=https://GitHub.Com/JoergWMittag/B001e/blob/master/%s]
+  s.extra_rdoc_files = %w[LICENSE.txt README.rst]
   s.files = filelist
   s.test_files = speclist
   s.description = <<-'HERE'
@@ -48,4 +53,9 @@ Boolean operators 'if', 'unless', 'and', 'or' and 'not' in
 pure Ruby. Lazy Evaluation / Short-circuiting is achieved
 through the use of blocks and lambda expressions.
   HERE
+end
+
+if __FILE__ == $0
+  Gem::manage_gems
+  Gem::Builder.new($spec).build
 end
