@@ -5,10 +5,7 @@ require 'rake'
 require 'rake/gempackagetask'
 
 taskdir = File.expand_path(File.dirname __FILE__).gsub(/(.*tasks).*?/, '\1')
-$LOAD_PATH.unshift taskdir unless $LOAD_PATH.include? taskdir
-
 basedir = File.expand_path File.join(taskdir, '..')
-$LOAD_PATH.unshift basedir unless $LOAD_PATH.include? basedir
 
 load Dir[File.expand_path File.join(basedir, '*.gemspec')].first
 

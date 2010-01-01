@@ -3,7 +3,4 @@
 
 require 'rake'
 
-taskdir = File.expand_path(File.dirname __FILE__).gsub(/(.*tasks).*?/, '\1')
-$LOAD_PATH.unshift taskdir unless $LOAD_PATH.include? taskdir
-
 task :default => :spec

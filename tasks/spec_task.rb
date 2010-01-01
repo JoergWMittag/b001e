@@ -4,9 +4,9 @@
 require 'rake'
 
 taskdir = File.expand_path(File.dirname __FILE__).gsub(/(.*tasks).*?/, '\1')
-$LOAD_PATH.unshift taskdir unless $LOAD_PATH.include? taskdir
+specdir = File.expand_path(File.join(taskdir, '..', 'spec'))
 
 desc 'Run the Specs'
 task :spec do
-  FileList[File.join taskdir, '..', 'spec', '**', '*_suite.rb'].each { |specsuite| require specsuite }
+  FileList[File.join specdir, '**', '*_suite.rb'].each { |specsuite| require specsuite }
 end

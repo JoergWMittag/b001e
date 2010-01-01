@@ -39,7 +39,7 @@ Operator / keyword style::
 
 becomes::
 
-	c1.and { c2 }.ifelse ->() { t }, ->() { c3.ifelse ->() { ei }, ->() { e } }
+	c1.and { c2 }.ifelse ->{ t }, ->{ c3.ifelse ->{ ei }, ->{ e } }
 
 .. _Smalltalk: http://Smalltalk.Org/
 
@@ -81,21 +81,19 @@ Installation
 
 ::
 
-	gem install JoergWMittag-b001e
+	gem install b001e
 
 Usage
 =====
 
 ::
 
-	begin require 'rubygems'; rescue LoadError
-	else begin gem 'JoergWMittag-b001e', '~> 0.0.3'; rescue Gem::LoadError; end end
 	require 'b001e'
 
 	true.and { nil.or { 42 } }.if { puts "It's true!" }
 	# Equivalent to: if true && (nil || 42) then puts "It's true!" end
 
-	false.ifelse ->() { puts "You'll never see this." }, ->() { puts 'But this!' }
+	false.ifelse ->{ puts "You'll never see this." }, ->{ puts 'But this!' }
 	# Equivalent to: if false then puts "You'll never see this." else puts 'But this!' end
 
 Acknowledgements

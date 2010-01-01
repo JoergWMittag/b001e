@@ -6,7 +6,12 @@
 
 require 'rake'
 
-taskdir = File.expand_path File.join(File.dirname(__FILE__), 'tasks')
-$LOAD_PATH.unshift taskdir unless $LOAD_PATH.include? taskdir
+basedir = File.expand_path File.dirname(__FILE__)
+taskdir = File.expand_path File.join(basedir, 'tasks')
+specdir = File.expand_path File.join(basedir, 'spec')
+libdir  = File.expand_path File.join(basedir, 'lib')
+
+$LOAD_PATH.unshift(specdir) unless $LOAD_PATH.include?(specdir)
+$LOAD_PATH.unshift(libdir)  unless $LOAD_PATH.include?(libdir)
 
 FileList[File.join taskdir, '**', '*_task.rb'].each { |raketask| load raketask }

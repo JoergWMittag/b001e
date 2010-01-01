@@ -3,9 +3,6 @@
 #Copyright (c) 2009 Jörg W Mittag <JoergWMittag+B001e@GoogleMail.Com>
 #This code is licensed under the terms of the MIT License (see LICENSE.txt)
 
-libdir = File.expand_path(File.dirname __FILE__).gsub(/(.*lib).*?/, '\1')
-$LOAD_PATH.unshift libdir unless $LOAD_PATH.include? libdir
-
 require 'b001e/truthiness'
 
 module B001e

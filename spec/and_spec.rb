@@ -4,8 +4,7 @@
 #Copyright (c) 2008 Engine Yard, Inc. All rights reserved.
 #This code was directly ported from <https://GitHub.Com/RubySpec/RubySpec/tree/master/language/and_spec.rb>
 
-require File.expand_path File.join(File.dirname(__FILE__), 'spec_helper')
-
+require 'spec_helper'
 require 'b001e'
 
 describe "The 'and' operator" do

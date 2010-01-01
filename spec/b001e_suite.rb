@@ -5,7 +5,6 @@
 #This code is licensed under the terms of the MIT License (see LICENSE.txt)
 
 specdir = File.expand_path(File.dirname __FILE__).gsub(/(.*spec).*?/, '\1')
-$LOAD_PATH.unshift specdir unless $LOAD_PATH.include? specdir
 
 require 'spec_helper'
 
